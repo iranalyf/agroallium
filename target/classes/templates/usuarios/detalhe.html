@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorator="layout/LayoutPadrao">
+
+<head>
+<title>Resumo</title>
+
+</head>
+
+<section layout:fragment="conteudo">
+
+
+	<h3>Resumo</h3>
+
+	<div class="alert  alert-success  alert-dismissible" role="alert"
+		th:if="${not #strings.isEmpty(mensagem)}">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<span th:text="${mensagem}"></span>
+	</div>
+
+	<form th:object="${usuarioDetalhe}">
+
+		<div class="row">
+			<div class="form-group  col-sm-4">
+				<label>Nome:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{nome}" disabled="disabled" />
+			</div>
+
+			<div class="form-group  col-sm-4">
+				<label>Empresa:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{empresa}" disabled="disabled" />
+			</div>
+			<div class="form-group  col-sm-4 ">
+				<label for="cpfOuCnpj" class="control-label">CPF/CNPJ</label> <input
+					type="text" class="form-control" id="cpfOuCnpj"
+					th:field="*{cpfOuCnpj}" disabled="disabled" />
+			</div>
+
+
+		</div>
+
+		<br />
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>
+					Você tem <b th:text="| ${{produtosCadastrados}}|">x</b> produtos
+					cadastrados para Venda
+				</h4>
+			</div>
+			<div class="col-sm-6">
+				<h4>
+					Você ja vendeu <b >0</b> Produtos
+				</h4>
+			</div>
+		</div>
+
+		<hr />
+		<br />
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">
+						 <small>últimos 6 meses</small>
+						</h2>
+					</div>
+					<div class="aw-graph-box__content">
+						<!-- <div class="aw-graph-box__no-data">
+							<i class="fa  fa-line-chart  fa-2x"></i> <span>Não há
+								dados</span>
+						</div> -->
+
+						<div>
+							<canvas id="graficoVendasPorMes" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-6">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">
+							Movimentações por Ano <small>Últimos 12 meses</small>
+						</h2>
+					</div>
+					<div class="aw-graph-box__content" style="position: relative">
+						<!-- <div class="aw-graph-box__no-data">
+							<i class="fa  fa-line-chart  fa-2x"></i> <span>Não há
+								dados</span>
+						</div> -->
+
+						<div>
+							<canvas id="graficoVendasPorAno" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</form>
+</section>
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/js/nf-mascara-cpf-cnpj.js}"></script>
+	<script th:src="@{/js/Chart.min.js}"></script>
+	<script th:src="@{/js/dashboard-graficos.js}"></script>
+</th:block>
+</html>

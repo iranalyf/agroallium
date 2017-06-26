@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorator="layout/LayoutPadrao">
+
+<head>
+<title>Carrinho</title>
+
+</head>
+
+<section layout:fragment="conteudo">
+
+	<h2>Sua Compra</h2>
+
+	<form method="get">
+
+		<table class="table table-bordered">
+
+			<thead class="aw-table-header-solid">
+				<tr>
+					<th>Logomarca</th>
+					<th>Descrição do Produto</th>
+					<th>Região</th>
+					<th>Valor</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+
+
+			<tr th:each="item : ${itens}">
+				<td align="center"><img class="img-responsive"
+					th:src="${item.produto.usuario.logoMarca}"
+					style="height: 50px; width: 50px; position: relative; display: table-cell;" /></td>
+				<td class="active" th:text="${item.produto.descricao}"></td>
+				<td class="active" th:text="${item.produto.usuario.endereco.regiao}"></td>
+				<td class="active" th:text="${item.produto.valor}"></td>
+				<td class="info" align="center">
+					<button class="btn  btn-danger btn-xs">Excluir</button>
+				</td>
+			</tr>
+
+		</table>
+
+		<br />
+		<div class="row">
+			<div class="col-sm-10"></div>
+			<div class="col-sm-2">
+				<button style="margin-left: 50px" class="btn  btn-success">Finalizar
+					Compra</button>
+			</div>
+		</div>
+	</form>
+
+</section>
+</html>

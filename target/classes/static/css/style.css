@@ -1,0 +1,95 @@
+body {
+	padding: 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: #00B7FF;
+}
+
+b {
+	color: #1E90FF;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 0px;
+	margin: 0px
+}
+
+hr {
+	display: block;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 1px;
+	color: #4682B4
+}
+
+.box {
+	padding: 20px;
+	margin-bottom: 15px;
+	border: 1px solid #eeeeee;
+	border-bottom: 3px solid #777;
+}
+
+.box__icon {
+	float: left;
+	color: #1e94d2;
+}
+
+.box__value {
+	font-size: 1.69em;
+	font-weight: 300;
+	text-align: right;
+}
+
+.box__title {
+	display: block;
+	font-size: 1em;
+	font-weight: 600;
+	text-align: right;
+}
+
+/*-------------------------------------------------*\
+  Graph box
+  - Container para gráfico (dashboard)
+\*-------------------------------------------------*/
+.aw-graph-box {
+	margin-bottom: 15px;
+	border: 1px solid #eeeeee;
+	border-bottom: 3px solid #eeeeee;
+}
+
+.aw-graph-box__header {
+	padding: 15px 20px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.aw-graph-box__content {
+	padding: 15px 20px;
+}
+
+.aw-graph-box__no-data {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	color: #777777;
+}
+
+.aw-graph-box__no-data>i {
+	margin-right: 5px;
+}
+
+.aw-graph-box__title {
+	margin: 0;
+	padding: 0;
+	font-size: 1.1em;
+	font-weight: 500;
+}

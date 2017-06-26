@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div class="modal fade" id="modalDetalheProduto" tabindex="-1"
+		th:fragment="modal" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Produto:</h4>
+				</div>
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="col-sm-12">
+							<input class="form-control" placeholder="Descrição"
+								disabled="disabled" />
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-sm-6">
+							<input class="form-control" placeholder="Valor"
+								disabled="disabled" />
+						</div>
+
+						<div class="col-sm-6">
+							<input class="form-control" placeholder="Região"
+								disabled="disabled" />
+						</div>
+					</div>
+
+					<br />
+					<div class="row">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<img style="width: 160px; height: 100px;" />
+						</div>
+						<div class="col-sm-4"></div>
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					
+					<button type="button" class="btn btn-info">Comprar</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

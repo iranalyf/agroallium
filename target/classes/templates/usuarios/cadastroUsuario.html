@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorator="layout/LayoutSimples">
+
+<head>
+<title>Cadastro de Usuário</title>
+
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="row">
+		<div class="form-group  col-sm-11">
+			<h2>Cadastro de Usuario</h2>
+		</div>
+		<div class="form-group  col-sm-1">
+			<a class="btn btn-primary btn-lg" th:href="@{/}">Voltar</a>
+		</div>
+	</div>
+	<div class="alert  alert-success  alert-dismissible" role="alert"
+		th:if="${not #strings.isEmpty(mensagem)}">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<span th:text="${mensagem}"></span>
+	</div>
+
+	<form th:action="@{/usuarios/novo}" method="POST"
+		th:object="${usuario}" enctype="multipart/form-data">
+
+		<div class="alert  alert-danger  alert-dismissible" role="alert"
+			th:if="${#fields.hasAnyErrors()}">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<th:block th:each="erro : ${#fields.detailedErrors()}">
+				<div>
+					<i class="fa  fa-exclamation-circle"></i> <span
+						th:text="${erro.message}"></span>
+				</div>
+			</th:block>
+		</div>
+
+		<input type="hidden" th:field="*{idUsuario}" />
+
+		<div class="row">
+			<div class="form-group  col-sm-4"
+				th:classappend="${#fields.hasErrors('nome')} ? has-error">
+				<label>Nome:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{nome}" />
+			</div>
+
+			<div class="form-group  col-sm-4">
+				<label>Empresa:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{empresa}" />
+			</div>
+			<div class="form-group  col-sm-4  "
+				th:classappend="${#fields.hasErrors('cpfOuCnpj')} ? has-error">
+				<label for="cpfOuCnpj" class="control-label">CPF/CNPJ</label> <input
+					type="text" class="form-control" id="cpfOuCnpj"
+					th:field="*{cpfOuCnpj}" />
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="form-group  col-sm-3">
+				<label>Rua:</label> <input class="form-control "
+					autofocus="autofocus" th:field="*{endereco.logradouro}" />
+			</div>
+
+			<div class="form-group  col-sm-2">
+				<label>Número:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{endereco.numero}" />
+			</div>
+
+			<div class="form-group  col-sm-3">
+				<label>Bairro:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{endereco.bairro}" />
+			</div>
+
+			<div class="form-group  col-sm-4">
+				<label>Complemento:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{endereco.complemento}" />
+			</div>
+		</div>
+		<div class="row">
+
+			<div class="form-group  col-sm-3"
+				th:classappend="${#fields.hasErrors('endereco.regiao')} ? has-error">
+				<label>Região:</label> <select class="form-control"
+					th:field="*{endereco.regiao}">
+					<option value="">Selecione</option>
+					<option th:each=" r : ${regioes}" th:value="${r}"
+						th:text="${r.descricao}"></option>
+				</select>
+			</div>
+
+			<div class="form-group  col-sm-3">
+				<label>CEP:</label> <input class="form-control js-cep"
+					autofocus="autofocus" th:field="*{endereco.cep}" />
+			</div>
+
+			<div class="form-group  col-sm-2">
+				<label>UF:</label> <select class="form-control"
+					th:field="*{endereco.estado}">
+					<option value="">Selecione</option>
+					<option th:each="uf : ${ufs}" th:value="${uf}" th:text="${uf}"></option>
+				</select>
+			</div>
+
+			<div class="form-group  col-sm-4">
+				<label>Cidade:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{endereco.cidade}" />
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="form-group  col-sm-4">
+				<label>Telefone:</label> <input class="form-control "
+					autofocus="autofocus" th:field="*{telefone}" />
+			</div>
+
+			<div class="form-group  col-sm-4"
+				th:classappend="${#fields.hasErrors('senha')} ? has-error">
+				<label>Senha:</label> <input class="form-control" type="password"
+					autofocus="autofocus" th:field="*{senha}" />
+			</div>
+
+			<div class="form-group  col-sm-4"
+				th:classappend="${#fields.hasErrors('confirmaSenha')} ? has-error">
+				<label>Confirma Senha:</label> <input class="form-control"
+					autofocus="autofocus" type="password" th:field="*{confirmaSenha}" />
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="form-group  col-sm-12">
+				<label>Logomarca da Empresa:</label> <input type="file" name="file"
+					class="form-control" />
+			</div>
+		</div>
+
+		<button class="btn btn-success">Cadastrar</button>
+		<button type="reset" class="btn btn-default">Limpar</button>
+	</form>
+</section>
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/js/nf-mascara-cpf-cnpj.js}"></script>
+</th:block>
+</html>

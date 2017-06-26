@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorator="layout/LayoutPadrao">
+
+<head>
+<title>Cadastro Produto</title>
+
+</head>
+
+<section layout:fragment="conteudo">
+
+	<br />
+	<h2>Cadastro de Produto</h2>
+
+	<div class="alert  alert-success  alert-dismissible" role="alert"
+		th:if="${not #strings.isEmpty(mensagem)}">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<span th:text="${mensagem}"></span>
+	</div>
+
+	<form th:action="@{/produtos/novo}" method="POST"
+		th:object="${produto}">
+
+		<div class="alert  alert-danger  alert-dismissible" role="alert"
+			th:if="${#fields.hasAnyErrors()}">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<th:block th:each="erro : ${#fields.detailedErrors()}">
+				<div>
+					<i class="fa  fa-exclamation-circle"></i> <span
+						th:text="${erro.message}"></span>
+				</div>
+			</th:block>
+		</div>
+
+		<input type="hidden" th:field="*{idProduto}" />
+
+		<div class="row">
+			<div class="form-group  col-sm-10"
+				th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+				<label>Descrição:</label> <input class="form-control"
+					autofocus="autofocus" th:field="*{descricao}" />
+			</div>
+
+			<div class="form-group  col-sm-2"
+				th:classappend="${#fields.hasErrors('valor')} ? has-error">
+				<label>Valor:</label> <input class="form-control js-decimal"
+					autofocus="autofocus" th:field="*{valor}" />
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="form-group  col-sm-12">
+				<label>Observação:</label>
+				<textarea rows="4" cols="40" class="form-control" th:field="*{obs}" />
+			</div>
+		</div>
+
+		<button class="btn btn-success">Cadastrar</button>
+	</form>
+</section>
+<th:block layout:fragment="javascript-extra">
+
+</th:block>
+</html>
